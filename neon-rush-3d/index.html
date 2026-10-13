@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#070b18">
-<title>NEON RUSH 3D</title>
+<meta name="theme-color" content="#111820">
+<title>NEON RUSH — STREET LEGENDS</title>
 <style>
-:root{--cyan:#48f4ff;--pink:#ff3fa4;--bg:#070b18}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,system-ui,Arial,sans-serif;color:#fff;touch-action:none}canvas{display:block;position:fixed;inset:0}#ui{position:fixed;inset:0;pointer-events:none;padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 16px)}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.brand{font-size:clamp(17px,4vw,25px);font-weight:1000;letter-spacing:.12em;text-shadow:0 0 18px #32dfff}.brand span{color:var(--pink)}.tag{font-size:9px;letter-spacing:.25em;color:#a5b5d7;margin-top:4px}.stats{display:flex;gap:8px}.stat{min-width:68px;padding:9px 11px;border:1px solid #ffffff28;background:#081327b8;backdrop-filter:blur(10px);border-radius:12px;text-align:right}.stat small{display:block;font-size:9px;letter-spacing:.16em;color:#9eb3d9}.stat strong{font-size:19px;font-variant-numeric:tabular-nums}.stat strong em{font-size:10px;color:var(--cyan);font-style:normal}.bottom{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 16px);display:flex;justify-content:space-between;align-items:end}.hint{font-size:10px;letter-spacing:.14em;color:#c0cee7;line-height:1.7;text-shadow:0 2px 8px #000}.controls{display:flex;gap:10px;pointer-events:auto}.control{width:64px;height:64px;border-radius:18px;border:1px solid #7cf8ff8a;background:#06172bc9;color:white;font-size:26px;box-shadow:0 0 22px #16dfff20;backdrop-filter:blur(8px);touch-action:none}.control:active{background:#16dfff65;transform:scale(.96)}.overlay{position:fixed;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#060a18db,#07182bd9);backdrop-filter:blur(8px);z-index:5}.panel{width:min(420px,100%);padding:28px 23px;border-radius:24px;border:1px solid #6df7ff55;background:linear-gradient(145deg,#101d35ed,#090f20f2);box-shadow:0 0 60px #00d9ff20;text-align:center}.eyebrow{font-size:10px;letter-spacing:.32em;color:var(--cyan);font-weight:800}.panel h1{font-size:clamp(34px,10vw,52px);line-height:.96;margin:12px 0;letter-spacing:-.05em;font-weight:1000}.panel h1 span{color:var(--pink);text-shadow:0 0 24px #ff3fa455}.panel p{font-size:13px;line-height:1.65;color:#b5c5e0;margin:16px 0 22px}.primary{pointer-events:auto;width:100%;padding:15px;border:0;border-radius:13px;background:linear-gradient(100deg,#20d9f4,#7b79ff);color:#07101c;font-size:13px;font-weight:1000;letter-spacing:.16em;box-shadow:0 8px 28px #20d9f433}.note{font-size:10px!important;color:#788ba9!important;margin-bottom:0!important}.hidden{display:none!important}#toast{position:absolute;top:22%;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.2em;color:#fff;text-shadow:0 0 15px var(--cyan);opacity:0;transition:opacity .2s}@media(min-width:700px){#ui{padding:24px 30px}.bottom{left:30px;right:30px;bottom:25px}.control{width:70px;height:70px}}@media(max-height:440px){.stat{padding:6px 9px}.control{width:52px;height:52px;border-radius:14px}.panel{padding:18px}.panel h1{font-size:34px}.panel p{margin:10px 0 14px}}
+:root{--cyan:#ff7a24;--pink:#ffb35c;--bg:#111820}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,system-ui,Arial,sans-serif;color:#fff;touch-action:none}canvas{display:block;position:fixed;inset:0}#ui{position:fixed;inset:0;pointer-events:none;padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 16px)}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.brand{font-size:clamp(17px,4vw,25px);font-weight:1000;letter-spacing:.12em;text-shadow:0 2px 18px #ff7a2440}.brand span{color:var(--pink)}.tag{font-size:9px;letter-spacing:.25em;color:#aeb8c5;margin-top:4px}.stats{display:flex;gap:8px}.stat{min-width:68px;padding:9px 11px;border:1px solid #ffffff24;background:#101923d9;backdrop-filter:blur(10px);border-radius:12px;text-align:right}.stat small{display:block;font-size:9px;letter-spacing:.16em;color:#9ca9b8}.stat strong{font-size:19px;font-variant-numeric:tabular-nums}.stat strong em{font-size:10px;color:var(--cyan);font-style:normal}.bottom{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 16px);display:flex;justify-content:space-between;align-items:end}.hint{font-size:10px;letter-spacing:.14em;color:#c0cee7;line-height:1.7;text-shadow:0 2px 8px #000}.controls{display:flex;gap:10px;pointer-events:auto}.control{width:64px;height:64px;border-radius:18px;border:1px solid #ffffff45;background:#1b2734e8;color:white;font-size:26px;box-shadow:0 8px 24px #0006;backdrop-filter:blur(8px);touch-action:none}.control:active{background:#ff7a24;transform:scale(.96)}.overlay{position:fixed;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#080d14eF,#111b27eF);backdrop-filter:blur(8px);z-index:5}.panel{width:min(420px,100%);padding:28px 23px;border-radius:24px;border:1px solid #ffffff24;background:linear-gradient(145deg,#202d3bed,#111820f7);box-shadow:0 24px 90px #0009;text-align:center}.eyebrow{font-size:10px;letter-spacing:.32em;color:#ff8a36;font-weight:800}.panel h1{font-size:clamp(34px,10vw,52px);line-height:.96;margin:12px 0;letter-spacing:-.05em;font-weight:1000}.panel h1 span{color:var(--pink);text-shadow:0 0 24px #ff7a2440}.panel p{font-size:13px;line-height:1.65;color:#b5c5e0;margin:16px 0 22px}.primary{pointer-events:auto;width:100%;padding:15px;border:0;border-radius:13px;background:linear-gradient(100deg,#ff7a24,#ffc16f);color:#17130f;font-size:13px;font-weight:1000;letter-spacing:.16em;box-shadow:0 8px 28px #ff7a2433}.note{font-size:10px!important;color:#9ba8b8!important;margin-bottom:0!important}.hidden{display:none!important}#toast{position:absolute;top:22%;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.2em;color:#fff;text-shadow:0 0 15px var(--cyan);opacity:0;transition:opacity .2s}@media(min-width:700px){#ui{padding:24px 30px}.bottom{left:30px;right:30px;bottom:25px}.control{width:70px;height:70px}}@media(max-height:440px){.stat{padding:6px 9px}.control{width:52px;height:52px;border-radius:14px}.panel{padding:18px}.panel h1{font-size:34px}.panel p{margin:10px 0 14px}}
 </style>
 </head>
 <body>
 <div id="ui">
  <div class="top">
-  <div><div class="brand">NEON<span>RUSH</span> <small style="font-size:10px;color:#91a5c7">3D</small></div><div class="tag">NIGHT DRIVE // ARCADE SERIES</div></div>
+  <div><div class="brand">NEON<span>RUSH</span> <small style="font-size:10px;color:#aeb8c5">3D</small></div><div class="tag">STREET LEGENDS · JDM RACING</div></div>
   <div class="stats"><div class="stat"><small>SCORE</small><strong id="score">00000</strong></div><div class="stat"><small>SPEED</small><strong><span id="speed">0</span> <em>KM/H</em></strong></div></div>
  </div>
  <div id="toast">NICE MOVE</div>
- <div class="bottom"><div class="hint">◀ ▶  STEER<br>AVOID TRAFFIC · BEAT YOUR RECORD</div><div class="controls"><button class="control" id="left" aria-label="Virar para esquerda">◀</button><button class="control" id="right" aria-label="Virar para direita">▶</button></div></div>
+ <div class="bottom"><div class="hint">◀ ▶  DIREÇÃO<br>DESVIE DO TRÁFEGO · SUPERE SEU RECORDE</div><div class="controls"><button class="control" id="left" aria-label="Virar para esquerda">◀</button><button class="control" id="right" aria-label="Virar para direita">▶</button></div></div>
 </div>
-<div class="overlay" id="menu"><div class="panel"><div class="eyebrow">ARCADE RACING EXPERIENCE</div><h1>NEON<br><span>RUSH</span> 3D</h1><p>Uma corrida noturna em alta velocidade. Desvie do tráfego, domine as pistas neon e bata seu recorde.</p><button class="primary" id="start">ACELERAR ▶</button><p class="note">CONTROLES: toque nas setas ou deslize para os lados.</p></div></div>
+<div class="overlay" id="menu"><div class="panel"><div class="eyebrow">JDM STREET RACING · 01</div><h1>NEON<br><span>RUSH</span></h1><p>Construa sua lenda nas ruas. Corra pela cidade à noite ou acelere nas estradas abertas. Domine as curvas, desvie do tráfego e prove seu talento.</p><button class="primary" id="start">INICIAR CORRIDA&nbsp; ↗</button><p class="note">ARCADE 3D · CONTROLES TOUCH · RECORDE LOCAL</p></div></div>
 <div class="overlay hidden" id="gameover"><div class="panel"><div class="eyebrow">CORRIDA ENCERRADA</div><h1>FIM DE<br><span>PISTA</span></h1><p>Pontuação: <b id="finalscore">0</b><br>Recorde: <b id="bestscore">0</b></p><button class="primary" id="restart">CORRER DE NOVO ↻</button><p class="note">O recorde fica salvo neste dispositivo.</p></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -27,33 +27,46 @@ const $=id=>document.getElementById(id);
 let scene,camera,renderer,player,clock,playing=false,score=0,speed=0,best=0,spawnTimer=0,roadMarks=[],obstacles=[],scenery=[],lane=0,targetX=0,swipeX=null,animationId=0;
 try{best=Number(localStorage.getItem('neonRushBest')||0)}catch(e){}
 function mat(color,roughness=.45,metalness=.2,emissive=0){return new THREE.MeshStandardMaterial({color,roughness,metalness,emissive:color,emissiveIntensity:emissive})}
-const cyan=mat(0x36eaff,.3,.4,.5),pink=mat(0xff318e,.35,.3,.4),white=mat(0xeaf5ff,.3,.25,.2),dark=mat(0x10182b,.3,.6,.08),rubber=mat(0x080b12,.9,.05),roadmat=mat(0x151c2c,.85,.1),glass= new THREE.MeshStandardMaterial({color:0x102b49,metalness:.65,roughness:.18}),gold=mat(0xffc857,.35,.2,.2);
+const cyan=mat(0xff812b,.3,.35,.15),pink=mat(0xffb45f,.35,.25,.1),white=mat(0xf1f3f5,.3,.25,.05),dark=mat(0x202833,.45,.35,.02),rubber=mat(0x080a0d,.9,.02),roadmat=mat(0x272d34,.9,.03),glass=new THREE.MeshStandardMaterial({color:0x172a3b,metalness:.55,roughness:.22}),gold=mat(0xffc857,.35,.2,.05);
 function box(parent,w,h,d,material,x,y,z){let m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);parent.add(m);return m}
-function makeCar(color=0x18dff4){
- const g=new THREE.Group(),paint=mat(color,.28,.72,.35),trim=mat(0x0a1020,.32,.55,.1);
- box(g,1.48,.38,2.65,paint,0,.48,0);box(g,1.2,.42,1.18,paint,0,.83,-.12);
- box(g,1.03,.29,.88,glass,0,1.03,-.1);
- box(g,.46,.08,.04,white,-.48,.57,1.33);box(g,.46,.08,.04,white,.48,.57,1.33);
- box(g,.38,.09,.04,pink,-.48,.48,-1.34);box(g,.38,.09,.04,pink,.48,.48,-1.34);
- box(g,1.55,.08,.28,trim,0,.32,1.18);
- for(const x of [-.79,.79])for(const z of [-.82,.83]){let wheel=new THREE.Mesh(new THREE.CylinderGeometry(.29,.29,.18,12),rubber);wheel.rotation.z=Math.PI/2;wheel.position.set(x,.3,z);g.add(wheel);let hub=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.19,10),cyan);hub.rotation.z=Math.PI/2;hub.position.set(x,.3,z);g.add(hub)}
- let glow=new THREE.PointLight(color,1.5,4);glow.position.set(0,.35,-1.4);g.add(glow);return g;
+function makeCar(color=0x247fe5){
+ const g=new THREE.Group(),paint=mat(color,.24,.72,.12),trim=mat(0x111820,.34,.55,.02),rubber=mat(0x080a0d,.92,.02),lamp=mat(0xfff1cf,.22,.1,.15);
+ // Low, wide Japanese street coupe: sculpted body, sloped cabin, hood and rear wing.
+ box(g,1.62,.36,3.05,paint,0,.48,0);
+ box(g,1.54,.22,1.0,paint,0,.64,.92); // hood
+ box(g,1.34,.34,1.34,paint,0,.78,-.28); // cabin base
+ const windshield=new THREE.Mesh(new THREE.BoxGeometry(1.18,.28,.72),glass);windshield.position.set(0,.91,.08);windshield.rotation.x=-.25;g.add(windshield);
+ box(g,1.14,.22,.54,glass,0,.9,-.52);
+ box(g,1.64,.12,.22,trim,0,.35,1.47);
+ box(g,1.66,.08,.18,trim,0,.82,-1.28); // spoiler
+ box(g,.09,.2,.09,trim,-.57,.69,-1.27);box(g,.09,.2,.09,trim,.57,.69,-1.27);
+ box(g,.42,.1,.035,lamp,-.52,.56,1.53);box(g,.42,.1,.035,lamp,.52,.56,1.53);
+ box(g,.34,.1,.035,pink,-.53,.48,-1.54);box(g,.34,.1,.035,pink,.53,.48,-1.54);
+ box(g,.18,.12,.08,trim,-.45,.34,-1.56);box(g,.18,.12,.08,trim,.45,.34,-1.56);
+ for(const x of [-.84,.84])for(const z of [-.94,.98]){
+  const tire=new THREE.Mesh(new THREE.CylinderGeometry(.31,.31,.2,16),rubber);tire.rotation.z=Math.PI/2;tire.position.set(x,.31,z);g.add(tire);
+  const rim=new THREE.Mesh(new THREE.CylinderGeometry(.19,.19,.205,12),mat(0xaab2bb,.25,.85,.01));rim.rotation.z=Math.PI/2;rim.position.set(x,.31,z);g.add(rim);
+  const hub=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.21,10),trim);hub.rotation.z=Math.PI/2;hub.position.set(x,.31,z);g.add(hub);
+ }
+ // Subtle warm underglow, not a futuristic neon effect.
+ const glow=new THREE.PointLight(0xff7929,.35,2.2);glow.position.set(0,.15,-.3);g.add(glow);
+ return g;
 }
 function init(){
- scene=new THREE.Scene();scene.background=new THREE.Color(0x070b18);scene.fog=new THREE.Fog(0x070b18,24,105);
+ scene=new THREE.Scene();scene.background=new THREE.Color(0x111820);scene.fog=new THREE.Fog(0x111820,30,115);
  camera=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,.1,180);camera.position.set(0,6.5,10.8);camera.lookAt(0,0,-8);
  renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=false;renderer.outputEncoding=THREE.sRGBEncoding;document.body.prepend(renderer.domElement);
- scene.add(new THREE.HemisphereLight(0x91dfff,0x101020,1.65));let sun=new THREE.DirectionalLight(0xffffff,1.2);sun.position.set(-4,10,6);scene.add(sun);
+ scene.add(new THREE.HemisphereLight(0xd7e3f2,0x24201c,1.45));let sun=new THREE.DirectionalLight(0xffe5cf,1.35);sun.position.set(-4,10,6);scene.add(sun);
  const road=new THREE.Mesh(new THREE.PlaneGeometry(10,150),roadmat);road.rotation.x=-Math.PI/2;road.position.set(0,-.03,-35);scene.add(road);
- for(let x of [-5.02,5.02]){let rail=box(scene,.08,.08,150,cyan,x,.05,-35);rail.material=cyan}
- for(let x of [-1.67,1.67])for(let i=0;i<24;i++){let m=box(scene,.055,.025,2.1,white,x,.005,10-i*5.4);roadMarks.push(m)}
+ for(let x of [-5.02,5.02]){let rail=box(scene,.07,.08,150,white,x,.05,-35);rail.material=white}
+ for(let x of [-1.67,1.67])for(let i=0;i<24;i++){let m=box(scene,.045,.025,2.1,white,x,.005,10-i*5.4);roadMarks.push(m)}
  // Distant skyline
  for(let i=0;i<36;i++){let side=i%2?1:-1,z=-12-Math.random()*88,x=side*(7+Math.random()*12),h=2+Math.random()*13,w=1+Math.random()*3;let b=box(scene,w,h,w,dark,x,h/2-.05,z);scenery.push(b);for(let j=0;j<3;j++){let win=box(scene,.045,.25,.05,i%3?cyan:pink,x+(Math.random()-.5)*w,h*.25+Math.random()*h*.55,z+w/2+.03);scenery.push(win)}}
  player=makeCar();player.position.set(0,0,3.2);scene.add(player);
  clock=new THREE.Clock();addEventListener('resize',resize);animate();
 }
 function resize(){if(!camera||!renderer)return;camera.aspect=innerWidth/innerHeight;camera.fov=innerWidth<innerHeight?66:55;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.5))}
-function spawnObstacle(){let lanes=[-3.25,0,3.25],x=lanes[Math.floor(Math.random()*3)];let g=makeCar([0xff4e72,0xffc857,0x8c79ff,0xeeeeff][Math.floor(Math.random()*4)]);g.scale.setScalar(.82);g.position.set(x,0,-68);scene.add(g);obstacles.push({mesh:g,z:-68,passed:false})}
+function spawnObstacle(){let lanes=[-3.25,0,3.25],x=lanes[Math.floor(Math.random()*3)];let g=makeCar([0xd73c36,0xe8e9e6,0x292f38,0xffa13d][Math.floor(Math.random()*4)]);g.scale.setScalar(.82);g.position.set(x,0,-68);scene.add(g);obstacles.push({mesh:g,z:-68,passed:false})}
 function endGame(){playing=false;$('finalscore').textContent=Math.floor(score);best=Math.max(best,Math.floor(score));$('bestscore').textContent=best;try{localStorage.setItem('neonRushBest',best)}catch(e){}$('gameover').classList.remove('hidden')}
 function start(){score=0;speed=110;spawnTimer=.4;lane=0;targetX=0;for(const o of obstacles)scene.remove(o.mesh);obstacles=[];player.position.x=0;player.rotation.z=0;$('score').textContent='00000';$('speed').textContent='110';$('menu').classList.add('hidden');$('gameover').classList.add('hidden');playing=true;clock.getDelta()}
 function steer(dir){if(!playing)return;lane=Math.max(-1,Math.min(1,lane+dir));targetX=lane*3.25}
