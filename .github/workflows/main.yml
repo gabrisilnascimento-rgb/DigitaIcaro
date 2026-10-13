@@ -1,0 +1,72 @@
+
+/*
+ * DigitaIcaro — auxiliar de testes
+ * Ajuste os seletores ao HTML real do jogo.
+ */
+
+const CONFIG = {
+  textoAlvo: "#texto-alvo",
+  campoEntrada: "#entrada-texto",
+  intervalo: 100 // milissegundos entre caracteres
+};
+
+let cancelado = false;
+
+async function preencherTexto() {
+  const alvo = document.querySelector(CONFIG.textoAlvo);
+  const campo = document.querySelector(CONFIG.campoEntrada);
+
+  if (!alvo || !campo) {
+    console.error(
+      "Não encontrei o texto-alvo ou o campo de entrada. " +
+      "Confira os seletores no CONFIG."
+    );
+    return;
+  }
+
+  const texto = alvo.textContent;
+  cancelado = false;
+
+  campo.focus();
+
+  for (let i = 0; i < texto.length; i++) {
+    if (cancelado) {
+      console.log("Digitação cancelada.");
+      return;
+    }
+
+    const caractere = texto[i];
+    const inicio = campo.value;
+    const novoValor = inicio + caractere;
+
+    campo.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: caractere,
+        bubbles: true
+      })
+    );
+
+    campo.value = novoValor;
+
+    campo.dispatchEvent(
+      new Event("input", { bubbles: true })
+    );
+
+    campo.dispatchEvent(
+      new KeyboardEvent("keyup", {
+        key: caractere,
+        bubbles: true
+      })
+    );
+
+    await new Promise(
+      resolve => setTimeout(resolve, CONFIG.intervalo)
+    );
+  }
+
+  console.log("Texto preenchido. Confira o resultado no jogo.");
+}
+
+function cancelarDigitacao() {
+  cancelado = true;
+}
