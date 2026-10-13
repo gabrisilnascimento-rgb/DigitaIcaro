@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#070b18">
+<title>NEON RUSH 3D</title>
+<style>
+:root{--cyan:#48f4ff;--pink:#ff3fa4;--bg:#070b18}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,system-ui,Arial,sans-serif;color:#fff;touch-action:none}canvas{display:block;position:fixed;inset:0}#ui{position:fixed;inset:0;pointer-events:none;padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 16px)}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.brand{font-size:clamp(17px,4vw,25px);font-weight:1000;letter-spacing:.12em;text-shadow:0 0 18px #32dfff}.brand span{color:var(--pink)}.tag{font-size:9px;letter-spacing:.25em;color:#a5b5d7;margin-top:4px}.stats{display:flex;gap:8px}.stat{min-width:68px;padding:9px 11px;border:1px solid #ffffff28;background:#081327b8;backdrop-filter:blur(10px);border-radius:12px;text-align:right}.stat small{display:block;font-size:9px;letter-spacing:.16em;color:#9eb3d9}.stat strong{font-size:19px;font-variant-numeric:tabular-nums}.stat strong em{font-size:10px;color:var(--cyan);font-style:normal}.bottom{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 16px);display:flex;justify-content:space-between;align-items:end}.hint{font-size:10px;letter-spacing:.14em;color:#c0cee7;line-height:1.7;text-shadow:0 2px 8px #000}.controls{display:flex;gap:10px;pointer-events:auto}.control{width:64px;height:64px;border-radius:18px;border:1px solid #7cf8ff8a;background:#06172bc9;color:white;font-size:26px;box-shadow:0 0 22px #16dfff20;backdrop-filter:blur(8px);touch-action:none}.control:active{background:#16dfff65;transform:scale(.96)}.overlay{position:fixed;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#060a18db,#07182bd9);backdrop-filter:blur(8px);z-index:5}.panel{width:min(420px,100%);padding:28px 23px;border-radius:24px;border:1px solid #6df7ff55;background:linear-gradient(145deg,#101d35ed,#090f20f2);box-shadow:0 0 60px #00d9ff20;text-align:center}.eyebrow{font-size:10px;letter-spacing:.32em;color:var(--cyan);font-weight:800}.panel h1{font-size:clamp(34px,10vw,52px);line-height:.96;margin:12px 0;letter-spacing:-.05em;font-weight:1000}.panel h1 span{color:var(--pink);text-shadow:0 0 24px #ff3fa455}.panel p{font-size:13px;line-height:1.65;color:#b5c5e0;margin:16px 0 22px}.primary{pointer-events:auto;width:100%;padding:15px;border:0;border-radius:13px;background:linear-gradient(100deg,#20d9f4,#7b79ff);color:#07101c;font-size:13px;font-weight:1000;letter-spacing:.16em;box-shadow:0 8px 28px #20d9f433}.note{font-size:10px!important;color:#788ba9!important;margin-bottom:0!important}.hidden{display:none!important}#toast{position:absolute;top:22%;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.2em;color:#fff;text-shadow:0 0 15px var(--cyan);opacity:0;transition:opacity .2s}@media(min-width:700px){#ui{padding:24px 30px}.bottom{left:30px;right:30px;bottom:25px}.control{width:70px;height:70px}}@media(max-height:440px){.stat{padding:6px 9px}.control{width:52px;height:52px;border-radius:14px}.panel{padding:18px}.panel h1{font-size:34px}.panel p{margin:10px 0 14px}}
+</style>
+</head>
+<body>
+<div id="ui">
+ <div class="top">
+  <div><div class="brand">NEON<span>RUSH</span> <small style="font-size:10px;color:#91a5c7">3D</small></div><div class="tag">NIGHT DRIVE // ARCADE SERIES</div></div>
+  <div class="stats"><div class="stat"><small>SCORE</small><strong id="score">00000</strong></div><div class="stat"><small>SPEED</small><strong><span id="speed">0</span> <em>KM/H</em></strong></div></div>
+ </div>
+ <div id="toast">NICE MOVE</div>
+ <div class="bottom"><div class="hint">◀ ▶  STEER<br>AVOID TRAFFIC · BEAT YOUR RECORD</div><div class="controls"><button class="control" id="left" aria-label="Virar para esquerda">◀</button><button class="control" id="right" aria-label="Virar para direita">▶</button></div></div>
+</div>
+<div class="overlay" id="menu"><div class="panel"><div class="eyebrow">ARCADE RACING EXPERIENCE</div><h1>NEON<br><span>RUSH</span> 3D</h1><p>Uma corrida noturna em alta velocidade. Desvie do tráfego, domine as pistas neon e bata seu recorde.</p><button class="primary" id="start">ACELERAR ▶</button><p class="note">CONTROLES: toque nas setas ou deslize para os lados.</p></div></div>
+<div class="overlay hidden" id="gameover"><div class="panel"><div class="eyebrow">CORRIDA ENCERRADA</div><h1>FIM DE<br><span>PISTA</span></h1><p>Pontuação: <b id="finalscore">0</b><br>Recorde: <b id="bestscore">0</b></p><button class="primary" id="restart">CORRER DE NOVO ↻</button><p class="note">O recorde fica salvo neste dispositivo.</p></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+let scene,camera,renderer,player,clock,playing=false,score=0,speed=0,best=0,spawnTimer=0,roadMarks=[],obstacles=[],scenery=[],lane=0,targetX=0,swipeX=null,animationId=0;
+try{best=Number(localStorage.getItem('neonRushBest')||0)}catch(e){}
+function mat(color,roughness=.45,metalness=.2,emissive=0){return new THREE.MeshStandardMaterial({color,roughness,metalness,emissive:color,emissiveIntensity:emissive})}
+const cyan=mat(0x36eaff,.3,.4,.5),pink=mat(0xff318e,.35,.3,.4),white=mat(0xeaf5ff,.3,.25,.2),dark=mat(0x10182b,.3,.6,.08),rubber=mat(0x080b12,.9,.05),roadmat=mat(0x151c2c,.85,.1),glass= new THREE.MeshStandardMaterial({color:0x102b49,metalness:.65,roughness:.18}),gold=mat(0xffc857,.35,.2,.2);
+function box(parent,w,h,d,material,x,y,z){let m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);parent.add(m);return m}
+function makeCar(color=0x18dff4){
+ const g=new THREE.Group(),paint=mat(color,.28,.72,.35),trim=mat(0x0a1020,.32,.55,.1);
+ box(g,1.48,.38,2.65,paint,0,.48,0);box(g,1.2,.42,1.18,paint,0,.83,-.12);
+ box(g,1.03,.29,.88,glass,0,1.03,-.1);
+ box(g,.46,.08,.04,white,-.48,.57,1.33);box(g,.46,.08,.04,white,.48,.57,1.33);
+ box(g,.38,.09,.04,pink,-.48,.48,-1.34);box(g,.38,.09,.04,pink,.48,.48,-1.34);
+ box(g,1.55,.08,.28,trim,0,.32,1.18);
+ for(const x of [-.79,.79])for(const z of [-.82,.83]){let wheel=new THREE.Mesh(new THREE.CylinderGeometry(.29,.29,.18,12),rubber);wheel.rotation.z=Math.PI/2;wheel.position.set(x,.3,z);g.add(wheel);let hub=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.19,10),cyan);hub.rotation.z=Math.PI/2;hub.position.set(x,.3,z);g.add(hub)}
+ let glow=new THREE.PointLight(color,1.5,4);glow.position.set(0,.35,-1.4);g.add(glow);return g;
+}
+function init(){
+ scene=new THREE.Scene();scene.background=new THREE.Color(0x070b18);scene.fog=new THREE.Fog(0x070b18,24,105);
+ camera=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,.1,180);camera.position.set(0,6.5,10.8);camera.lookAt(0,0,-8);
+ renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=false;renderer.outputEncoding=THREE.sRGBEncoding;document.body.prepend(renderer.domElement);
+ scene.add(new THREE.HemisphereLight(0x91dfff,0x101020,1.65));let sun=new THREE.DirectionalLight(0xffffff,1.2);sun.position.set(-4,10,6);scene.add(sun);
+ const road=new THREE.Mesh(new THREE.PlaneGeometry(10,150),roadmat);road.rotation.x=-Math.PI/2;road.position.set(0,-.03,-35);scene.add(road);
+ for(let x of [-5.02,5.02]){let rail=box(scene,.08,.08,150,cyan,x,.05,-35);rail.material=cyan}
+ for(let x of [-1.67,1.67])for(let i=0;i<24;i++){let m=box(scene,.055,.025,2.1,white,x,.005,10-i*5.4);roadMarks.push(m)}
+ // Distant skyline
+ for(let i=0;i<36;i++){let side=i%2?1:-1,z=-12-Math.random()*88,x=side*(7+Math.random()*12),h=2+Math.random()*13,w=1+Math.random()*3;let b=box(scene,w,h,w,dark,x,h/2-.05,z);scenery.push(b);for(let j=0;j<3;j++){let win=box(scene,.045,.25,.05,i%3?cyan:pink,x+(Math.random()-.5)*w,h*.25+Math.random()*h*.55,z+w/2+.03);scenery.push(win)}}
+ player=makeCar();player.position.set(0,0,3.2);scene.add(player);
+ clock=new THREE.Clock();addEventListener('resize',resize);animate();
+}
+function resize(){if(!camera||!renderer)return;camera.aspect=innerWidth/innerHeight;camera.fov=innerWidth<innerHeight?66:55;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.5))}
+function spawnObstacle(){let lanes=[-3.25,0,3.25],x=lanes[Math.floor(Math.random()*3)];let g=makeCar([0xff4e72,0xffc857,0x8c79ff,0xeeeeff][Math.floor(Math.random()*4)]);g.scale.setScalar(.82);g.position.set(x,0,-68);scene.add(g);obstacles.push({mesh:g,z:-68,passed:false})}
+function endGame(){playing=false;$('finalscore').textContent=Math.floor(score);best=Math.max(best,Math.floor(score));$('bestscore').textContent=best;try{localStorage.setItem('neonRushBest',best)}catch(e){}$('gameover').classList.remove('hidden')}
+function start(){score=0;speed=110;spawnTimer=.4;lane=0;targetX=0;for(const o of obstacles)scene.remove(o.mesh);obstacles=[];player.position.x=0;player.rotation.z=0;$('score').textContent='00000';$('speed').textContent='110';$('menu').classList.add('hidden');$('gameover').classList.add('hidden');playing=true;clock.getDelta()}
+function steer(dir){if(!playing)return;lane=Math.max(-1,Math.min(1,lane+dir));targetX=lane*3.25}
+function animate(){animationId=requestAnimationFrame(animate);let dt=Math.min(clock?clock.getDelta():.016,.04);if(playing){speed=Math.min(245,speed+dt*2.1);score+=dt*speed*.7;$('score').textContent=String(Math.floor(score)).padStart(5,'0');$('speed').textContent=Math.floor(speed);spawnTimer-=dt;if(spawnTimer<=0){spawnObstacle();spawnTimer=Math.max(.56,1.25-(speed-110)/220)+Math.random()*.38}
+ roadMarks.forEach(m=>{m.position.z+=dt*speed*.36;if(m.position.z>10)m.position.z-=129.6});
+ scenery.forEach(o=>{o.position.z+=dt*speed*.34;if(o.position.z>12)o.position.z=-100-Math.random()*30});
+ obstacles.forEach(o=>{o.z+=dt*speed*.34;o.mesh.position.z=o.z;if(!o.passed&&o.z>1){o.passed=true;score+=100}if(Math.abs(o.z-player.position.z)<1.65&&Math.abs(o.mesh.position.x-player.position.x)<1.45){endGame()}});
+ for(let i=obstacles.length-1;i>=0;i--)if(obstacles[i].z>13){scene.remove(obstacles[i].mesh);obstacles.splice(i,1)}
+ player.position.x+=(targetX-player.position.x)*Math.min(1,dt*8);player.rotation.z=(targetX-player.position.x)*-.055;player.position.y=.025+Math.sin(performance.now()*.012)*.018;
+ camera.position.x+=(player.position.x*.22-camera.position.x)*dt*1.5;camera.lookAt(player.position.x*.12,0,-8);
+ }renderer.render(scene,camera)}
+$('start').addEventListener('click',start);$('restart').addEventListener('click',start);$('left').addEventListener('pointerdown',e=>{e.preventDefault();steer(-1)});$('right').addEventListener('pointerdown',e=>{e.preventDefault();steer(1)});
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')steer(-1);if(e.key==='ArrowRight'||e.key==='d')steer(1);if((e.key===' '||e.key==='Enter')&&!playing)start()});
+addEventListener('touchstart',e=>{if(e.touches.length)swipeX=e.touches[0].clientX},{passive:true});addEventListener('touchend',e=>{if(swipeX===null||!playing)return;let dx=e.changedTouches[0].clientX-swipeX;if(Math.abs(dx)>22)steer(dx>0?1:-1);swipeX=null},{passive:true});
+try{init()}catch(err){document.body.innerHTML='<div style="padding:24px;color:white;font-family:system-ui">Este navegador não conseguiu iniciar o modo 3D. Atualize o Chrome e tente novamente.</div>';console.error(err)}
+})();
+</script>
+</body>
+</html>
